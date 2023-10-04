@@ -9,7 +9,7 @@ def home(request):
     categories = Category.objects.all()
     
     context = {'posts': posts , 'categories': categories}
-    print(context)
+    
     return render(request, "index.html", context)
 
 def blog_post(request,pk):
@@ -18,3 +18,5 @@ def blog_post(request,pk):
     
     context = {'post': post , 'categories': categories}
     return render(request,"blog_post.html",context)
+
+

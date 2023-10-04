@@ -11,6 +11,10 @@ class User(AbstractUser):
     username = None
     id = models.UUIDField(primary_key=True,default=uuid.uuid1,editable=False)
     email = models.EmailField(_("email address"), unique=True)
+    bio = models.TextField(max_length=50,null=True)
+    dob = models.DateField(auto_now_add=False,null=True)
+    address = models.CharField(max_length=50,null=True)
+    avatar = models.ImageField(upload_to="avatars",blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -20,21 +24,3 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
     
-class UserProfile(models.Model):
-    user = models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE,editable=False)
-    bio = models.TextField(max_length=50,null=True)
-    dob = models.DateField(auto_now_add=False,null=True)
-    address = models.CharField(max_length=50,null=True)
-    avatar = models.ImageField(upload_to="avatars",blank=True)
-
-    def __str__(self):
-        return str(self.user.email)
-    
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.userprofile.save()
