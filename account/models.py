@@ -14,7 +14,7 @@ class User(AbstractUser):
     bio = models.TextField(max_length=50,null=True)
     dob = models.DateField(auto_now_add=False,null=True)
     address = models.CharField(max_length=50,null=True)
-    avatar = models.ImageField(upload_to="avatars",blank=True)
+    avatar = models.ImageField(upload_to="avatars",blank=True,default="image/default.webp")
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

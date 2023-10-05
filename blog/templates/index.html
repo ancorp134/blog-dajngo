@@ -53,7 +53,7 @@
                             <a href="#!"><img class="card-img-top" src="{{post.image.url}}" alt="..." /></a>
                             <div class="card-body">
                                 <div class="small text-muted">{{post.pub_date}}</div>
-                                <h2 class="card-title h4">{{ post.title }}</h2>
+                                <h2 class="card-title h4">{{ post.title|slice:":50"  }}</h2>
                                 <p class="card-text">{{ post.content|slice:":50" }}...</p>
                                 <a class="btn btn-primary" href="{% url 'blogpost' post.id %}">Read more →</a>
                             </div>
